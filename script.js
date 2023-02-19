@@ -15,8 +15,8 @@ window.addEventListener("load", function () {
       this.size = this.effect.gap;
       this.vx = 0;
       this.vy = 0;
-      this.ease = 1;
-      this.friction = 0.95;
+      this.ease = 0.2;
+      this.friction = 0.9;
       this.dx = 0;
       this.dy = 0;
       this.distance = 0;
@@ -39,8 +39,8 @@ window.addEventListener("load", function () {
         this.vy += this.force * Math.sin(this.angle);
       }
 
-      this.x += this.vx * this.friction + (this.originX - this.x) * this.ease;
-      this.y += this.vy * this.friction + (this.originY - this.y) * this.ease;
+      this.x += (this.vx *= this.friction) + (this.originX - this.x) * this.ease;
+      this.y += (this.vy *= this.friction) + (this.originY - this.y) * this.ease;
     }
     warp() {
       this.x = Math.random() * this.effect.width;
@@ -61,7 +61,7 @@ window.addEventListener("load", function () {
       this.y = this.centerY - this.image.height * 0.5;
       this.gap = 2;
       this.mouse = {
-        radius: 3000,
+        radius: 1000,
         x: undefined,
         y: undefined,
       };
